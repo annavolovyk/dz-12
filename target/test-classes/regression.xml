@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Man and Woman Tests">
+
+    <test name="Man and woman Test">
+        <packages>
+            <package name="manandwomantests"/>
+        </packages>
+        <classes>
+            <class name="manandwomantests.PersonTest"/>
+            <class name="manandwomantests.ManTest"/>
+            <class name="manandwomantests.WomanTest"/>
+        </classes>
+    </test>
+</suite>
