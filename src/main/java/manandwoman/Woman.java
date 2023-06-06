@@ -4,7 +4,7 @@ public class Woman extends Person {
 
     private String oldLastName;
 
-    public Woman() {
+    public Woman(String firstname, String lastname, int age, Person partner) {
         super();
     }
 

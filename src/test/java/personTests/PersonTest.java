@@ -5,14 +5,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class PersonTest {
+    private Person person;
+    private Person partner;
+
     @Test(dataProvider = "manFirstNameData", priority = 10, description = "Should be run after testGetWomanFirstName")
     public void testGetManFirstName(String manFirstName, String manRightFirstName) {
-        Person person = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
         person.setFirstName(manFirstName);
         Assert.assertEquals(person.getFirstName(), manRightFirstName);
     }
@@ -28,12 +25,6 @@ public class PersonTest {
 
     @Test(dataProvider = "womanFirstNameData", priority = 4)
     public void testGetWomanFirstName(String womanFirstName, String womanRightFirstName) {
-        Person person = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
         person.setFirstName(womanFirstName);
         Assert.assertEquals(person.getFirstName(), womanRightFirstName);
     }
@@ -49,12 +40,6 @@ public class PersonTest {
 
     @Test(dataProvider = "manLastNameData")
     public void testGetManLastName(String manLastName, String manRightLastName) {
-        Person person = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
         person.setLastName(manLastName);
         Assert.assertEquals(person.getLastName(), manRightLastName);
     }
@@ -69,12 +54,6 @@ public class PersonTest {
 
     @Test(dataProvider = "womanLastNameData")
     public void testGetWomanLastName(String womanLastName, String womanRightLastName) {
-        Person person = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
         person.setLastName(womanLastName);
         Assert.assertEquals(person.getLastName(), womanRightLastName);
     }
@@ -89,12 +68,6 @@ public class PersonTest {
 
     @Test(dataProvider = "manAge")
     public void testManGetAge(int manActualAge, int manExpectedAge) {
-        Person person = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
         person.setAge(manActualAge);
         Assert.assertEquals(person.getAge(), manExpectedAge);
     }
@@ -106,12 +79,6 @@ public class PersonTest {
 
     @Test(dataProvider = "womanAge")
     public void testWomanGetAge(int womanActualAge, int womanExpectedAge) {
-        Person person = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
         person.setAge(womanActualAge);
         Assert.assertEquals(person.getAge(), womanExpectedAge);
     }
@@ -123,62 +90,22 @@ public class PersonTest {
 
     @Test(dataProvider = "manPartner")
     public void testGetManPartner(Person partner) {
-        Person person = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
         person.setPartner(partner);
         Assert.assertEquals(person.getPartner(), partner);
     }
     @DataProvider(name = "manPartner")
     public Object[][] manPartnerData() {
-        Person person1 = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
-        Person person2 = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
-        person1.setFirstName("Alex");
-        person2.setFirstName("Mark");
-
-        return new Object[][]{{null}, {person1}, {person2}};
+        person.setFirstName("Alex");
+        return new Object[][]{{null}, {person}};
     }
     @Test(dataProvider = "womanPartner")
     public void testGetWomanPartner(Person partner) {
-        Person person = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
         person.setPartner(partner);
         Assert.assertEquals(person.getPartner(), partner);
     }
     @DataProvider(name = "womanPartner")
     public Object[][] womanPartnerData() {
-        Person person1 = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
-        Person person2 = new Person() {
-            @Override
-            public boolean isRetired() {
-                return false;
-            }
-        };
-        person1.setFirstName("Mary");
-        person2.setFirstName("Anna");
-
-        return new Object[][]{{null}, {person1}, {person2}};
+        person.setFirstName("Mary");
+        return new Object[][]{{null}, {person}};
     }
 }

@@ -13,10 +13,6 @@ public abstract class Person {
         this.age = age;
     }
 
-    public Person() {
-
-    }
-
     public String getFirstName() {
         return firstName;
     }
