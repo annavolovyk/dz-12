@@ -1,112 +1,61 @@
 package manandwomantests;
+import dataproviders.TestDataProvider;
 import manandwoman.Person;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 public class PersonTest {
     private Person person;
-    private Person partner;
-
-    @Test(dataProvider = "manFirstNameData", priority = 10, description = "Should be run after testGetWomanFirstName")
-    public void testGetManFirstName(String manFirstName, String manRightFirstName) {
-        person.setFirstName(manFirstName);
-        Assert.assertEquals(person.getFirstName(), manRightFirstName);
-    }
-
-    @DataProvider(name = "manFirstNameData")
-    public Object[][] manDataFirstName() {
-        return new Object[][]{
-                {"Mark", "Alex"},
-                {"John", "David"},
-                {"Michael", "Peter"}
+    @BeforeMethod
+    public void creatingPerson() {
+        person = new Person("Alex", "Smith", null, 65) {
+            @Override
+            public boolean isRetired() {
+                return false;
+            }
         };
     }
-
-    @Test(dataProvider = "womanFirstNameData", priority = 4)
-    public void testGetWomanFirstName(String womanFirstName, String womanRightFirstName) {
-        person.setFirstName(womanFirstName);
-        Assert.assertEquals(person.getFirstName(), womanRightFirstName);
+    @Test(dataProvider = "personTestData", dataProviderClass = TestDataProvider.class)
+    public void testGetFirstName(String firstName, String lastName, Person partner, int age) {
+        person.setFirstName(firstName);
+        Assert.assertEquals(person.getFirstName(), firstName);
     }
 
-    @DataProvider(name = "womanFirstNameData")
-    public Object[][] womanDataFirstName() {
-        return new Object[][]{
-                {"Mary", "Anna"},
-                {"Juliet", "Valery"},
-                {"Roberta", "Emma"}
-        };
+    @Test(dataProvider = "personTestData", dataProviderClass = TestDataProvider.class)
+    public void testSetFirstName(String firstName, String lastName, Person partner, int age) {
+        person.setFirstName(firstName);
+        Assert.assertEquals(person.getFirstName(), firstName);
+    }
+    @Test(dataProvider = "personTestData", dataProviderClass = TestDataProvider.class)
+    public void testGetLastName(String firstName, String lastName, Person partner, int age) {
+        person.setLastName(lastName);
+        Assert.assertEquals(person.getLastName(), lastName);
+    }
+    @Test(dataProvider = "personTestData", dataProviderClass = TestDataProvider.class)
+    public void testSetLastName(String firstName, String lastName, Person partner, int age) {
+        person.setLastName(lastName);
+        Assert.assertEquals(person.getLastName(), lastName);
     }
 
-    @Test(dataProvider = "manLastNameData")
-    public void testGetManLastName(String manLastName, String manRightLastName) {
-        person.setLastName(manLastName);
-        Assert.assertEquals(person.getLastName(), manRightLastName);
+    @Test(dataProvider = "personTestData", dataProviderClass = TestDataProvider.class)
+    public void testGetAge(String firstName, String lastName, Person partner, int age) {
+        person.setAge(age);
+        Assert.assertEquals(person.getAge(), age);
     }
-
-    @DataProvider(name = "manLastNameData")
-    public Object[][] manDataLastName() {
-        return new Object[][]{
-                {"Smith", "Black"},
-                {"Reynolds", "Hardy"},
-        };
+    @Test(dataProvider = "personTestData", dataProviderClass = TestDataProvider.class)
+    public void testSetAge(String firstName, String lastName, Person partner, int age) {
+        person.setAge(age);
+        Assert.assertEquals(person.getAge(), age);
     }
-
-    @Test(dataProvider = "womanLastNameData")
-    public void testGetWomanLastName(String womanLastName, String womanRightLastName) {
-        person.setLastName(womanLastName);
-        Assert.assertEquals(person.getLastName(), womanRightLastName);
-    }
-
-    @DataProvider(name = "womanLastNameData")
-    public Object[][] womanDataLastName() {
-        return new Object[][]{
-                {"Smith", "Black"},
-                {"Reynolds", "Hardy"},
-        };
-    }
-
-    @Test(dataProvider = "manAge")
-    public void testManGetAge(int manActualAge, int manExpectedAge) {
-        person.setAge(manActualAge);
-        Assert.assertEquals(person.getAge(), manExpectedAge);
-    }
-
-    @DataProvider(name = "manAge")
-    public static Object[][] manAgeData() {
-        return new Object[][]{{60}, {66}, {65}};
-    }
-
-    @Test(dataProvider = "womanAge")
-    public void testWomanGetAge(int womanActualAge, int womanExpectedAge) {
-        person.setAge(womanActualAge);
-        Assert.assertEquals(person.getAge(), womanExpectedAge);
-    }
-
-    @DataProvider(name = "womanAge")
-    public static Object[][] womanAgeData() {
-        return new Object[][]{{59}, {66}, {61}};
-    }
-
-    @Test(dataProvider = "manPartner")
-    public void testGetManPartner(Person partner) {
+    @Test(dataProvider = "personTestData", dataProviderClass = TestDataProvider.class)
+    public void testGetPartner(String firstName, String lastName, Person partner, int age) {
         person.setPartner(partner);
         Assert.assertEquals(person.getPartner(), partner);
     }
-    @DataProvider(name = "manPartner")
-    public Object[][] manPartnerData() {
-        person.setFirstName("Alex");
-        return new Object[][]{{null}, {person}};
-    }
-    @Test(dataProvider = "womanPartner")
-    public void testGetWomanPartner(Person partner) {
+    @Test(dataProvider = "personTestData", dataProviderClass = TestDataProvider.class)
+    public void testSetPartner(String firstName, String lastName, Person partner, int age) {
         person.setPartner(partner);
         Assert.assertEquals(person.getPartner(), partner);
-    }
-    @DataProvider(name = "womanPartner")
-    public Object[][] womanPartnerData() {
-        person.setFirstName("Mary");
-        return new Object[][]{{null}, {person}};
     }
 }
