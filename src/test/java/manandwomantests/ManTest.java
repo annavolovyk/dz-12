@@ -8,14 +8,8 @@ import org.testng.annotations.Test;
 public class ManTest {
     private Man man;
 
-    @BeforeMethod
-    public void creatingMan() {
-        man = new Man("Alex", "Smith", 65, null);
-    }
-
-    @Test(dataProvider = "mantests", dataProviderClass = TestDataProvider.class)
-    public void testIsRetired(int age, boolean expectedAge) {
-        man.setAge(age);
-        Assert.assertEquals(man.isRetired(), expectedAge);
+    @Test(dataProvider = "manRetiredData", dataProviderClass = TestDataProvider.class)
+    public void testSetRetired(Man man, boolean expectedIsRetiredResult) {
+        Assert.assertEquals(man.isRetired(), expectedIsRetiredResult, "Check the age for retirement");
     }
 }

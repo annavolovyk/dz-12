@@ -7,6 +7,7 @@ public class Woman extends Person {
     public Woman(String firstname, String lastname, int age, Person partner) {
         super(firstname, lastname, partner, age);
     }
+
     public void setOldLastName(String oldLastName) {
         this.oldLastName = oldLastName;
     }
@@ -16,22 +17,21 @@ public class Woman extends Person {
         return getAge() > 60;
     }
 
-
-    public Object registerPartnership(Person partner) {
-        if (getPartner() == null) {
-            setLastName(String.valueOf(getPartner().getLastName()));
-        } else
-            System.out.println("Has a partner");;
-        return getPartner();
+    public void registerPartnership(Person partner) {
+        if (partner != null) {
+            setLastName(partner.getLastName());
+        } else {
+            System.out.println("Has no partner.");
+        }
     }
 
     public void deregisterPartnership(boolean returnToOldLastName) {
         if (getPartner() == null) {
-            System.out.println(getFirstName() + " " + getLastName() + "- has no partner.");
-            return;
-        }
-        if (returnToOldLastName && oldLastName != null) {
+            System.out.println(getFirstName() + " " + getLastName() + "- has no partner.");}
+        if (returnToOldLastName) {
             setLastName(oldLastName);
+            if (oldLastName == null) {
+                System.out.println("There is no maiden name");}
         }
         setPartner(null);
     }
