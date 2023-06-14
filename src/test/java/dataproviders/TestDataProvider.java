@@ -6,15 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 
     public class TestDataProvider {
-        @BeforeMethod
-        public void creatingPerson() {
-            Person person = new Person("Alex", "Smith", null, 65) {
-                @Override
-                public boolean isRetired() {
-                    return false;
-                }
-            };
-        }
 
         @DataProvider(name = "manRetiredData")
         public static Object[][] manRetiredData() {

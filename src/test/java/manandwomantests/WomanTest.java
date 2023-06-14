@@ -15,12 +15,9 @@ public class WomanTest {
 
     @Test(dataProvider = "womanTest2", dataProviderClass = TestDataProvider.class)
     public void registerPartnership_shouldCheckIfWomanHasNoPartner(Woman woman, boolean expectedHasNoPartner) {
-        if (expectedHasNoPartner) {
-            Assert.assertEquals(woman.getPartner(), null, "Has no partner");
-
-
-        }
+        Assert.assertNull(woman.getPartner(), "Has a partner");
     }
+
     @Test(dataProvider = "womanTest3", dataProviderClass = TestDataProvider.class)
     public void selectOldLastName(Woman woman, boolean returnToOldLastName, String oldLastName, String expectedLastName) {
         woman.setOldLastName(oldLastName);

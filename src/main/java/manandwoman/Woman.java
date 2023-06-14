@@ -18,20 +18,20 @@ public class Woman extends Person {
     }
 
     public void registerPartnership(Person partner) {
-        if (partner != null) {
-            setLastName(partner.getLastName());
+        if (getPartner() == null) {
+            setPartner(partner);
+            System.out.println("Partnership registered with " + partner.getLastName());
         } else {
-            System.out.println("Has no partner.");
+            System.out.println("Already has a partner.");
         }
     }
 
     public void deregisterPartnership(boolean returnToOldLastName) {
         if (getPartner() == null) {
-            System.out.println(getFirstName() + " " + getLastName() + "- has no partner.");}
+            System.out.println(getFirstName() + " " + getLastName() + " has no partner.");
+        }
         if (returnToOldLastName) {
             setLastName(oldLastName);
-            if (oldLastName == null) {
-                System.out.println("There is no maiden name");}
         }
         setPartner(null);
     }
